@@ -7,6 +7,8 @@
     <title>新規作成</title>
 
     <script src="/assets/js/metrixir.client.js"></script>
+    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+
 </head>
 <body>
 <div class="full height image" layout:fragment="content">
@@ -47,6 +49,21 @@
                                 <label><font color="red">*</font>生年月日(yyyy/mm/dd)</label>
                                 <input type="text" name="dateOfBirth" th:value="${form.dateOfBirth}"/>
                             </div>
+                            <!-- ▼郵便番号入力フィールド(7桁) -->
+                            <div class="field" th:classappend="${form.hasErrors('zipCode')} ? 'error'">
+                                <label><font color="red">*</font>郵便番号</label>
+                            </div>
+                            <div class="field" th:classappend="${form.hasErrors('address')} ? 'error'">
+
+
+                            <input type="text" name="zip11" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');">
+
+                            <!-- ▼住所入力フィールド(都道府県+以降の住所) -->
+                                <label><font color="red">*</font>ご住所</label>
+                            <input type="text" name="addr11" size="60">
+                            </div>
+
+<!--
                             <div class="field" th:classappend="${form.hasErrors('zipCode')} ? 'error'">
                                 <label><font color="red">*</font>郵便番号</label>
                                 <input type="text" class="zipcode" name="zipCode" th:value="${form.zipCode}"/>
@@ -55,6 +72,7 @@
                                 <label>ご住所</label>
                                 <input type="text" name="address" th:value="${form.address}"/>
                             </div>
+                            -->
                             <div class="field" th:classappend="${form.hasErrors('homePhoneNumber')} ? 'error'">
                                 <label><font color="red">*</font>自宅電話番号</label>
                                 <input type="text" name="homePhoneNumber" th:value="${form.homePhoneNumber}"/>
