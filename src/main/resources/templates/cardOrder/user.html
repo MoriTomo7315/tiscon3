@@ -29,15 +29,15 @@
                             <div class="ui horizontal divider">ご本人について（<font color="red">*</font> は必須入力です）</div>
 
                             <div class="field" th:classappend="${form.hasErrors('kanjiName')} ? 'error'">
-                                <label><font color="red">*</font>お名前（漢字）</label>
+                                <label><font color="red">*</font>お名前（漢字　例：田中太郎）</label>
                                 <input type="text" name="kanjiName" th:value="${form.kanjiName}"/>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('kanaName')} ? 'error'">
-                                <label><font color="red">*</font>お名前（カナ）</label>
+                                <label><font color="red">*</font>お名前（カナ　例：タナカタロウ）</label>
                                 <input type="text" name="kanaName" th:value="${form.kanaName}"/>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('alphabetName')} ? 'error'">
-                                <label><font color="red">*</font>お名前（ローマ字）</label>
+                                <label><font color="red">*</font>お名前（ローマ字　例：Taro Tanaka）</label>
                                 <input type="text" name="alphabetName" th:value="${form.alphabetName}"/>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('gender')} ? 'error'">
@@ -46,12 +46,12 @@
                                 <input type="radio" name="gender" value="female" th:checked="${form.gender}=='female'"/>女性
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('dateOfBirth')} ? 'error'">
-                                <label><font color="red">*</font>生年月日(yyyy/mm/dd)</label>
+                                <label><font color="red">*</font>生年月日(例：1990/01/01)</label>
                                 <input type="text" name="dateOfBirth" th:value="${form.dateOfBirth}"/>
                             </div>
                             <!-- ▼郵便番号入力フィールド(7桁) -->
                             <div class="field" th:classappend="${form.hasErrors('zipCode')} ? 'error'">
-                                <label><font color="red">*</font>郵便番号</label>
+                                <label><font color="red">*</font>郵便番号(例：123-4567)</label>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('address')} ? 'error'">
 
