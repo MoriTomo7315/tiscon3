@@ -7,6 +7,7 @@
     <title>お勤め先の入力</title>
 
     <script src="/assets/js/metrixir.client.js"></script>
+    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 </head>
 <body>
 <div class="full height image" layout:fragment="content">
@@ -32,6 +33,22 @@
                                 <label>お勤め先名</label>
                                 <input type="text" name="employerName" th:value="${form.employerName}"/>
                             </div>
+
+                            <!-- ▼郵便番号入力フィールド(7桁) -->
+                            <div class="field" th:classappend="${form.hasErrors('zipCode')} ? 'error'">
+                                <label><font color="red">*</font>お勤め先郵便番号</label>
+                            </div>
+                            <div class="field" th:classappend="${form.hasErrors('address')} ? 'error'">
+
+
+                                <input type="text" name="zip11" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');">
+
+                                <!-- ▼住所入力フィールド(都道府県+以降の住所) -->
+                                <label><font color="red">*</font>お勤め先住所</label>
+                                <input type="text" name="addr11" size="60">
+                            </div>
+
+                            <!--
                             <div class="field" th:classappend="${form.hasErrors('employerZipCode')} ? 'error'">
                                 <label>お勤め先郵便番号</label>
                                 <input type="text" name="employerZipCode" th:value="${form.employerZipCode}"/>
@@ -40,6 +57,7 @@
                                 <label>お勤め先住所</label>
                                 <input type="text" name="employerAddress" th:value="${form.employerAddress}"/>
                             </div>
+                            -->
                             <div class="field" th:classappend="${form.hasErrors('employerPhoneNumber')} ? 'error'">
                                 <label>お勤め先電話番号</label>
                                 <input type="text" name="employerPhoneNumber" th:value="${form.employerPhoneNumber}"/>
