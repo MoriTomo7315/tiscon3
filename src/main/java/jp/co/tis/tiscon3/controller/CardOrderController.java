@@ -55,8 +55,14 @@ public class CardOrderController {
     public HttpResponse inputJob(CardOrderForm form) {
         // エラーを出したくないので強制的にエラーを消す.
         form.setErrors(null);
+        switch (form.getJob()){
+            case "経営自営": case "会社員": case "契約派遣": case "公務員": case "民間団体": case "他有職":
+                return templateEngine.render("cardOrder/job", "form", form);
+            default:
+                return create(form);
+        }
+        //return templateEngine.render("cardOrder/job", "form", form);
 
-        return templateEngine.render("cardOrder/job", "form", form);
     }
 
     /**
