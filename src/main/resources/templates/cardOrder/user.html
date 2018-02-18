@@ -3,12 +3,24 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/layout">
+
 <head>
     <title>新規作成</title>
 
     <script src="/assets/js/metrixir.client.js"></script>
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
-
+    <script src="/assets/js/jquery-1.8.2.min.js"></script>
+    <!--<script src="https://github.com/posabsolute/jQuery-Validation-Engine/blob/master/js/jquery-1.8.2.min.js"></script>-->
+    <script src="/assets/js/jquery.validationEngine.js"></script>
+    <!--<script src="https://github.com/posabsolute/jQuery-Validation-Engine/blob/master/js/jquery.validationEngine.js"></script>-->
+    <script src="/assets/js/jquery.validationEngine-ja.js"></script>
+    <!--<script src="https://github.com/posabsolute/jQuery-Validation-Engine/blob/master/js/languages/jquery.validationEngine-ja.js"></script>-->
+    <link rel="stylesheet" href="/assets/css/validationEngine.jquery.css">
+    <script>
+    $(function(){
+        jQuery("#form_customer").validationEngine();
+    });
+    </script>
 </head>
 <body>
 <div class="full height image" layout:fragment="content">
@@ -19,7 +31,7 @@
                     <div class="ui segment metrixir">
                         <h1 class="ui aligned header teal">お申込み情報</h1>
 
-                        <form class="ui form" method="post" action="/cardOrder/user">
+                        <form class="ui form" id="form_customer" method="post" action="/cardOrder/user">
 
                             <!-- /*エラーがあれば表示する*/ -->
                             <ul class="ui red basic label" th:if="${form.hasErrors()}">
@@ -31,24 +43,24 @@
 
                             <div class="field" th:classappend="${form.hasErrors('kanjiName')} ? 'error'">
                                 <label><font color="red">*</font>お名前（漢字　例：田中太郎）</label>
-                                <input type="text" name="kanjiName" th:value="${form.kanjiName}"/>
+                                <input type="text" name="kanjiName" th:value="${form.kanjiName}" class="validate[required]"/>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('kanaName')} ? 'error'">
                                 <label><font color="red">*</font>お名前（カナ　例：タナカタロウ）</label>
-                                <input type="text" name="kanaName" th:value="${form.kanaName}"/>
+                                <input type="text" name="kanaName" th:value="${form.kanaName}" class="validate[required]"/>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('alphabetName')} ? 'error'">
                                 <label><font color="red">*</font>お名前（ローマ字　例：Taro Tanaka）</label>
-                                <input type="text" name="alphabetName" th:value="${form.alphabetName}"/>
+                                <input type="text" name="alphabetName" th:value="${form.alphabetName}" class="validate[required]"/>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('gender')} ? 'error'">
                                 <label><font color="red">*</font>性別</label>
-                                <input type="radio" name="gender" value="male" th:checked="${form.gender}=='male'"/>男性
-                                <input type="radio" name="gender" value="female" th:checked="${form.gender}=='female'"/>女性
+                                <input type="radio" name="gender" value="male" th:checked="${form.gender}=='male'" class="validate[required]"/>男性
+                                <input type="radio" name="gender" value="female" th:checked="${form.gender}=='female'" class="validate[required]"/>女性
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('dateOfBirth')} ? 'error'">
                                 <label><font color="red">*</font>生年月日(例：1990/01/01)</label>
-                                <input type="text" name="dateOfBirth" th:value="${form.dateOfBirth}"/>
+                                <input type="text" name="dateOfBirth" th:value="${form.dateOfBirth}" class="validate[required]"/>
                             </div>
                             <!-- ▼郵便番号入力フィールド(7桁) -->
                             <div class="field" th:classappend="${form.hasErrors('zipCode')} ? 'error'">
@@ -57,11 +69,11 @@
                             <div class="field" th:classappend="${form.hasErrors('address')} ? 'error'">
 
 
-                            <input type="text" name="zip11" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');">
+                            <input type="text" name="zip11" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');" class="validate[required]">
 
                             <!-- ▼住所入力フィールド(都道府県+以降の住所) -->
                                 <label><font color="red">*</font>ご住所</label>
-                            <input type="text" name="addr11" size="60">
+                            <input type="text" name="addr11" size="60" class="validate[required]">
                             </div>
 
 <!--
@@ -76,7 +88,7 @@
                             -->
                             <div class="field" th:classappend="${form.hasErrors('homePhoneNumber')} ? 'error'">
                                 <label><font color="red">*</font>自宅電話番号(例：00-0000-0000)</label>
-                                <input type="text" name="homePhoneNumber" th:value="${form.homePhoneNumber}"/>
+                                <input type="text" name="homePhoneNumber" th:value="${form.homePhoneNumber}" class="validate[required,custom[phone]]"/>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('mobilePhoneNumber')} ? 'error'">
                                 <label>携帯電話番号(例：000-0000-0000)</label>
@@ -84,7 +96,7 @@
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('emailAddress')} ? 'error'">
                                 <label><font color="red">*</font>メールアドレス</label>
-                                <input type="text" name="emailAddress" th:value="${form.emailAddress}"/>
+                                <input type="text" name="emailAddress" th:value="${form.emailAddress}" class="validate[required,custom[email]]"/>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('spouse')} ? 'error'">
                                 <label><font color="red">*</font>配偶者有無</label>
@@ -105,11 +117,11 @@
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('debt')} ? 'error'">
                                 <label><font color="red">*</font>ローン等のお借り入れ金額</label>
-                                <input type="text" class="number" name="debt" th:value="${form.debt}"/><span class="unit">万円</span>
+                                <input type="text" class="number, validate[required]" name="debt" th:value="${form.debt}" /><span class="unit">万円</span>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('income')} ? 'error'">
                                 <label><font color="red">*</font>昨年の所得</label>
-                                <input type="text" class="number" name="income" th:value="${form.income}"/><span class="unit">万円</span>
+                                <input type="text" class="number, validate[required]" name="income" th:value="${form.income}"/><span class="unit">万円</span>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('job')} ? 'error'">
                                 <label><font color="red">*</font>ご職業</label>
